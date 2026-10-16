@@ -20,3 +20,17 @@ jobs:
 
       - name: Run tests
         run: python -m unittest discover -v
+
+  build:
+    needs: test
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Download code
+        uses: actions/checkout@v6
+
+      - name: Build Docker image
+        run: docker build -t ci-demo:${{ github.sha }} .
+
+      - name: Run tests inside container
+        run: docker run --rm ci-demo:${{ github.sha }}
