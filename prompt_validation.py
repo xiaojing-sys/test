@@ -11,6 +11,6 @@ def validate_prompt(prompt: str, max_chars: int = 2000) -> str:
     normalized = prompt.strip()
     if not normalized:
         raise ValueError("prompt must not be empty")
-    if len(normalized) >= max_chars:
+    if len(normalized) > max_chars:
         raise ValueError("prompt exceeds the character limit")
     return normalized
